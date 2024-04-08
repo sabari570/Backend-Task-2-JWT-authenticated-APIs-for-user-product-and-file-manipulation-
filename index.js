@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth-routes");
+const productRoutes = require("./routes/product-routes");
 require("dotenv").config();
 
 // Initialising the express app
@@ -26,3 +27,4 @@ mongoose
   .catch((err) => console.log("Mongoose connection errro: ", err));
 
 app.use("/api", authRoutes);
+app.use('/api/products', productRoutes);

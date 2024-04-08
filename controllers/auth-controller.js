@@ -14,7 +14,7 @@ let refreshTokens = [];
 const createToken = (id) => {
   // creating access token that expires after every 15m
   const accessToken = jwt.sign({ id }, ACCESS_TOKEN_SECRET_KEY, {
-    expiresIn: "15m",
+    expiresIn: "60m",
   });
 
   // creating refresh token that expires each day
