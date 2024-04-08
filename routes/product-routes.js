@@ -5,7 +5,7 @@ const {
   fetchProducts,
   fetchProductById,
   updateProductById,
-  deleteProduct,
+  deleteProductById,
 } = require("../controllers/product-controller");
 
 const router = Router();
@@ -23,6 +23,6 @@ router.get("/fetch-product/:id", authMiddleware, fetchProductById);
 router.put("/update-product/:id", authMiddleware, updateProductById);
 
 // route for deleting a product
-router.delete("/delete-product/:id", authMiddleware, deleteProduct);
+router.delete("/delete-product/:id", authMiddleware, deleteProductById);
 
 module.exports = router;

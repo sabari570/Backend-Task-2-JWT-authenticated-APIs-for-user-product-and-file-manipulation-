@@ -123,7 +123,7 @@ module.exports.updateProductById = async (req, res) => {
 };
 
 // controller for deleting a product by productId
-module.exports.deleteProduct = async (req, res) => {
+module.exports.deleteProductById = async (req, res) => {
   const userId = req.userId;
   const productId = req.params.id;
   try {
