@@ -44,7 +44,7 @@ module.exports.createProduct = async (req, res) => {
 
 // controller for fetching the products
 module.exports.fetchProducts = async (req, res) => {
-  const userId = new mongoose.Types.ObjectId(req.userId);
+  const userId = req.userId;
   try {
     let userProducts = await UserProducts.findOne({ userId });
     if (!userProducts)
