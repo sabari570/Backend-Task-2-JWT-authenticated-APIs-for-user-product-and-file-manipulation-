@@ -27,6 +27,6 @@ mongoose
   })
   .catch((err) => console.log("Mongoose connection errro: ", err));
 
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/file', fileRoutes);
