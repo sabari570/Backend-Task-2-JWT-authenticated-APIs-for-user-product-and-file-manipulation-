@@ -12,16 +12,13 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
-
 // For accessing json requests
 app.use(express.json());
 // code to access the files uploaded to server
 app.use('/uploaded-files', express.static(path.join(__dirname, 'uploaded-files')));
 
 // Connecting to MongoDB and starting the server
-const dbURI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@authcrudcluster.xskeskn.mongodb.net/${DBNAME}?retryWrites=true&w=majority&appName=AuthCRUDCluster`;
+const dbURI = `mongodb://localhost:27017/${DBNAME}`;
 mongoose
   .connect(dbURI)
   .then((client) => {
