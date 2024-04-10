@@ -137,4 +137,4 @@ The mongoose model for storing file details related to the user.
 
 ### Token Blacklist Model
 
-The mongoose model for storing the blacklisted tokens. These tokens expire after 1 hour.
+The mongoose model for storing the blacklisted tokens.
