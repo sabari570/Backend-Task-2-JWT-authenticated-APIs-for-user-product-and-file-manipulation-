@@ -34,8 +34,7 @@ This repository contains a Node.js API built with Express.js, providing user aut
 - **mongoose**: An ODM (Object Data Modeling) library for MongoDB and Node.js.
 
 ## Project Structure
-
-\`\`\`
+```
 .
 ├── index.js
 ├── routes
@@ -58,69 +57,69 @@ This repository contains a Node.js API built with Express.js, providing user aut
 └── utils
     ├── error-handler.js
     └── file-storage-config.js
-\`\`\`
+```
 
 ## Installation
 
 1. Clone the repository:
 
-\`\`\`bash
-git clone https://github.com/yourusername/nodejs-express-jwt-crud.git
-\`\`\`
+```bash
+git clone https://github.com/sabari570/Backend-Task-2-JWT-authenticated-APIs-for-user-product-and-file-manipulation-.git
+```
 
 2. Navigate to the project directory:
 
-\`\`\`bash
+```bash
 cd nodejs-express-jwt-crud
-\`\`\`
+```
 
 3. Install dependencies:
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ## Configuration
 
 Create a \`.env\` file in the root directory and add the following:
 
-\`\`\`env
+```env
 JWT_ACCESS_TOKEN_SECRET_KEY=your_access_token_secret_key
 JWT_REFRESH_TOKEN_SECRET_KEY=your_refresh_token_secret_key
 PORT=port_number_to_run_the_server
-\`\`\`
+```
 
 ## Running the Application
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 ## Endpoints
 
 ### User Authentication
 
-- \`POST /api/auth/register\`: Register a new user
-- \`POST /api/auth/login\`: Authenticate and login a user
-- \`POST /api/auth/regenerate-token\`: Refresh the JWT token
-- \`POST /api/auth/logout\`: Logout a user
+- `POST /api/auth/register`: Register a new user
+- `POST /api/auth/login`: Authenticate and login a user
+- `POST /api/auth/regenerate-token`: Refresh the JWT token
+- `POST /api/auth/logout`: Logout a user
 
 ### Product CRUD Operations
 
-- \`POST /api/products/create-product\`: Create a new product
-- \`GET /api/products/fetch-products\`: Fetch all products for a user
-- \`GET /api/products/fetch-product/:id\`: Fetch a single product by ID
-- \`PUT /api/products/update-product/:id\`: Update a product by ID
-- \`DELETE /api/products/delete-product/:id\`: Delete a product by ID
+- `POST /api/products/create-product`: Create a new product
+- `GET /api/products/fetch-products`: Fetch all products for a user
+- `GET /api/products/fetch-product/:id`: Fetch a single product by ID
+- `PUT /api/products/update-product/:id`: Update a product by ID
+- `DELETE /api/products/delete-product/:id`: Delete a product by ID
 
 ### File Upload/Download Operations
 
-- \`POST /api/file/upload-file\`: Upload a file
-- \`GET /api/file/download-file/:fileId\`: Download a file by ID
+- `POST /api/file/upload-file`: Upload a file
+- `GET /api/file/download-file/:fileId`: Download a file by ID
 
 ## Error Handling
 
-Errors are handled using a custom error handler utility (\`error-handler.js\`) which formats the error messages.
+Errors are handled using a custom error handler utility (`error-handler.js`) which formats the error messages.
 
 ## Models
 
