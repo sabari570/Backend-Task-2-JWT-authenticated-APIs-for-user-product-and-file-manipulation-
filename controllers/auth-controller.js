@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
-const handleErrors = require("../utils/error-handler");
+const { handleErrors } = require("../utils/error-handler");
 const TokenBlackList = require("../models/token-blacklist-model");
 require("dotenv").config();
 
@@ -14,7 +14,7 @@ let refreshTokens = [];
 const createToken = (id) => {
   // creating access token that expires after every 15m
   const accessToken = jwt.sign({ id }, ACCESS_TOKEN_SECRET_KEY, {
-    expiresIn: "60m",
+    expiresIn: "1d",
   });
 
   // creating refresh token that expires each day
@@ -26,13 +26,14 @@ const createToken = (id) => {
 
 // controller for registering users
 module.exports.register = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ name, email, password });
     const { accessToken, refreshToken } = createToken(user._id);
     const formattedUserObject = {
       id: user._id,
-      emai: user.email,
+      name: user.name,
+      email: user.email,
     };
     res.status(201).json({
       ...formattedUserObject,
@@ -59,13 +60,20 @@ module.exports.login = async (req, res) => {
 
     const formattedUserObject = {
       id: user._id,
-      emai: user.email,
+      name: user.name,
+      email: user.email,
     };
-    res.status(200).json({
+    const userInfo = {
       ...formattedUserObject,
       "access-token": accessToken,
       "refresh-token": refreshToken,
+    };
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
+    res.status(200).json(userInfo);
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -102,13 +110,14 @@ module.exports.regenerateToken = (req, res) => {
 
 // controller for logging users out and update the tokenBlackList in the database
 module.exports.logout = async (req, res) => {
-  const { accessToken } = req.body;
+  const { accessToken } = req.cookies;
 
   if (!accessToken)
     return res.status(401).json({ message: "You are not authenticated" });
 
   try {
     await TokenBlackList.create({ token: accessToken });
+    res.cookie("accessToken", "", { expires: new Date(0) });
     return res.status(200).json({ message: "User logged out successfully" });
   } catch (err) {
     console.log("Error while logging out: ", err.message, err.code);
